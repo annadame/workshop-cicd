@@ -11,6 +11,9 @@ pipeline {
                 dir('code/backend'){
                     sh 'npm install'
                 }
+                dir('code/frontend'){
+                    sh 'npm install'
+                }
             }
         }
         stage('Build') {
@@ -19,6 +22,9 @@ pipeline {
             }
             steps {
                 dir('code/backend'){
+                    sh 'npm run build'
+                } 
+                dir('code/frontend'){
                     sh 'npm run build'
                 }    
             }
