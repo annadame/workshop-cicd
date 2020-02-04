@@ -55,7 +55,11 @@ pipeline {
         }
         stage('e2e Test') {
             steps {             
-                echo 'e2e Test'
+                dir('code'){
+                   sh 'docker-compose -f docker-compose-e2e.yml build'
+                   sh 'docker-compose -f docker-compose-e2e.yml up -d frontend backend'
+                   sh 'docker-compose -f docker-compose-e2e.yml down --rmi=all -v'
+                }
             }
             post {
                 always {
